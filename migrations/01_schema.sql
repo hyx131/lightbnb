@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS property_reviews CASCADE;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
+  name TEXT NOT NULL,
   email CITEXT UNIQUE,
   password TEXT NOT NULL
 );
@@ -23,7 +23,7 @@ CREATE TABLE properties (
   street TEXT NOT NULL,
   city TEXT NOT NULL,
   province TEXT NOT NULL,
-  postal_code TEXT NOT NULL,
+  post_code TEXT NOT NULL,
   country TEXT NOT NULL,
   parking_spaces SMALLINT,
   number_of_bathrooms SMALLINT,

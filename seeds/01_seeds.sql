@@ -5,7 +5,7 @@ VALUES
 ('noface', 'noface@email.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u');
 
 
-INSERT INTO properties (owner_id, title, description, thumbnail_photo_url, cover_photo_url, cost_per_night, street, city, province, postal_code, country, parking_spaces, number_of_bathrooms, number_of_bedrooms, active)
+INSERT INTO properties (owner_id, title, description, thumbnail_photo_url, cover_photo_url, cost_per_night, street, city, province, post_code, country, parking_spaces, number_of_bathrooms, number_of_bedrooms, active)
 VALUES 
 (1, 'title_1', 'description_1', 'url1', 'url2', 50, '635 NAMSUB HIGHWAY', 'sotboske', 'ontario', '83689', 'canada', 6, 4, 3, true),
 (2, 'title_2', 'description_2', 'url1', 'url2', 50, '645 SUB HWAY', 'sotboske', 'ontario', '83789', 'canada', 6, 4, 3, true),
