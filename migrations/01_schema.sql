@@ -1,44 +1,49 @@
 CREATE EXTENSION CITEXT;
 
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS properties CASCADE;
+DROP TABLE IF EXISTS reservations CASCADE;
+DROP TABLE IF EXISTS property_reviews CASCADE;
+
 CREATE TABLE users (
-  id SERIAL PRIMARY KEY NOT NULL,
-  name VARCHAR(255),
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
   email CITEXT UNIQUE,
-  password text NOT NULL
+  password TEXT NOT NULL
 );
 
 CREATE TABLE properties (
-  id SERIAL PRIMARY KEY NOT NULL,
-  owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  title TEXT,
+  id SERIAL PRIMARY KEY,
+  owner_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  title TEXT NOT NULL,
   description TEXT,
   thumbnail_photo_url TEXT,
   cover_photo_url TEXT,
-  cost_per_night INTEGER,
-  street TEXT,
-  city TEXT,
-  province TEXT,
-  postal_code TEXT,
-  country TEXT,
-  parking_spaces INTEGER,
-  number_of_bathrooms INTEGER,
-  number_of_bedroms INTEGER,
+  cost_per_night MONEY NOT NULL,
+  street TEXT NOT NULL,
+  city TEXT NOT NULL,
+  province TEXT NOT NULL,
+  postal_code TEXT NOT NULL,
+  country TEXT NOT NULL,
+  parking_spaces SMALLINT,
+  number_of_bathrooms SMALLINT,
+  number_of_bedrooms SMALLINT,
   active BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE reservations (
-  id SERIAL PRIMARY KEY NOT NULL,
-  start_date DATE,
-  end_date DATE,
-  property_id INTEGER REFERENCES properties(id) ON DELETE CASCADE,
-  guest_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+  id SERIAL PRIMARY KEY,
+  start_date DATE NOT NULL,
+  end_date DATE NOT NULL,
+  property_id INTEGER NOT NULL REFERENCES properties(id) ON DELETE CASCADE,
+  guest_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE property_reviews (
-  id SERIAL PRIMARY KEY NOT NULL,
-  guest_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  reservation_id INTEGER REFERENCES reservations(id) ON DELETE CASCADE,
-  property_id INTEGER REFERENCES properties(id) ON DELETE CASCADE,
-  rating INTEGER,
+  id SERIAL PRIMARY KEY,
+  guest_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  reservation_id INTEGER NOT NULL REFERENCES reservations(id) ON DELETE CASCADE,
+  property_id INTEGER NOT NULL REFERENCES properties(id) ON DELETE CASCADE,
+  rating SMALLINT CONSTRAINT rating_val CHECK (rating >= 1 AND rating <=5),
   message TEXT
 );
