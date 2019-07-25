@@ -19,7 +19,7 @@ CREATE TABLE properties (
   description TEXT,
   thumbnail_photo_url TEXT,
   cover_photo_url TEXT,
-  cost_per_night MONEY NOT NULL,
+  cost_per_night NUMERIC NOT NULL,
   street TEXT NOT NULL,
   city TEXT NOT NULL,
   province TEXT NOT NULL,
